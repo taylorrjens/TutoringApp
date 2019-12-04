@@ -11,6 +11,10 @@ import { auth } from "./firebase";
 export function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
+  const [classchoice, setClass] = useState("");
+  const [contactemail, setContactemail] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
@@ -76,6 +80,7 @@ export function SignIn(props) {
           </div>
         </Paper>
       </div>
+      
     </div>
   );
 }
@@ -87,7 +92,7 @@ export function SignUp(props) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
       if (u) {
-        props.history.push("/app");
+        props.history.push("/app/profile");
       }
     });
 
@@ -148,6 +153,7 @@ export function SignUp(props) {
             </Button>
           </div>
         </Paper>
+        
       </div>
     </div>
   );

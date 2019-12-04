@@ -13,6 +13,7 @@ import "./styles.css";
 
 export default function Survey(props) {
   const [name, setName] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
   const [classchoice, setClass] = useState("");
   const [contactemail, setContactemail] = useState("");
 
@@ -20,7 +21,12 @@ export default function Survey(props) {
     db.collection("users")
       .doc(props.user.uid)
       .collection("surveys")
-      .add({name: name, classchoice: classchoice, contactemail: contactemail})
+      .add({
+        name: name,
+        classchoice: classchoice,
+        contactemail: contactemail,
+        phonenumber: phonenumber
+      })
       .then(() => {
         props.history.push("/app/profile/");
       });
@@ -59,9 +65,9 @@ export default function Survey(props) {
         <Typography style={{ marginTop: 20 }}>Phone Number</Typography>
         <TextField
           fullWidth
-          value={name}
+          value={phonenumber}
           onChange={e => {
-            setName(e.target.value);
+            setPhoneNumber(e.target.value);
           }}
         />
         <Button

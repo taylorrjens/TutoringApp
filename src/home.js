@@ -14,7 +14,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import "./styles.css";
 
-export default function Static(props) {
+export default function Home(props) {
   return (
     <div>
       <div>
@@ -120,7 +120,14 @@ export default function Static(props) {
           }}
         >
           <Typography variant="h6">Get in Touch/ Sign In</Typography>
-          <Typography />
+          <div style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              marginTop: "15px",
+              alignItems: "center" }}>
+          <Button component={Link} to="/signup" color="primary" variant="contained">Get in Touch</Button>
+          <Button component={Link} to="/signin" color="primary" variant="contained">Sign In</Button>
+          </div>
         </Paper>
       </div>
     </div>

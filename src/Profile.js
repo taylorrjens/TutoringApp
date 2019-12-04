@@ -18,6 +18,20 @@ export default function Profile(props) {
     <div>
       <Typography>Link to Calendar</Typography>
       <Typography>Profile Details</Typography>
+      <Paper
+        style={{
+          padding: 30,
+          width: 400,
+          marginTop: 100,
+          marginLeft: 30,
+          marginRight: 30
+        }}
+      >
+        <Typography variant="h6" style={{ marginTop: 20, marginBottom: 20 }}>
+          Profile Details
+        </Typography>
+        <Typography />
+      </Paper>
       <Typography>Venmo Account Details</Typography>
     </div>
   );

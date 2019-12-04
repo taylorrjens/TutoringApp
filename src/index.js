@@ -5,12 +5,14 @@ import * as serviceWorker from "./serviceWorker";
 import { App } from "./App";
 import { SignIn, SignUp } from "./Authentication";
 import { BrowserRouter, Route } from "react-router-dom";
+import Home from "./home";
 
 ReactDOM.render(
   <BrowserRouter>
     <div>
-      <Route exact path="/" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
+      <Route exact path="/signin" component={SignIn} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/" component={Home} />
       <Route path="/app" component={App} />
     </div>
   </BrowserRouter>,

@@ -11,9 +11,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link, Route } from "react-router-dom";
 import { auth, db } from "./firebase";
-import Static from "./Static";
 import Profile from "./Profile";
 import Survey from "./Survey";
+import Home from "./home";
 
 export function App(props) {
   const [drawer_open, setDrawerOpen] = useState(false);
@@ -47,7 +47,7 @@ export function App(props) {
   }
 
   return (
-    <div style={{ flexGrow: 1 }}>
+    <div>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -118,7 +118,7 @@ export function App(props) {
         path="/app/"
         render={routeProps => {
           return (
-            <Static
+            <Home
               user={user}
               match={routeProps.match}
               location={routeProps.location}
