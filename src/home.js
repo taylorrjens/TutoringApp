@@ -12,7 +12,6 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import "./styles.css";
 
 export default function Home(props) {
   return (
@@ -21,27 +20,32 @@ export default function Home(props) {
         <Paper
           style={{
             padding: 30,
-            width: 400,
-            marginTop: 100,
+            width: 800,
+            marginTop: 20,
             marginLeft: 30,
             marginRight: 30
           }}
         >
-          <Typography variant="h6" style={{ marginTop: 20, marginBottom: 20 }}>
+          <Typography variant="h4" style={{ marginTop: 20, marginBottom: 20 }}>
             BYU Personal Tutoring Services
           </Typography>
-          <Typography>
-            One-on-one tutoring services provided for BYU students for Economics
-            110, Principles of Statistics 121, Finance 201, Math 110, Math 112
-            (Calculus), Finite Mathematics 118, Economics 380, & Economics 382.
-          </Typography>
+          <div>
+            <Typography>
+              One-on-one tutoring services provided for BYU students for:
+            </Typography>
+            <Typography>Economics 110, 380, 382</Typography>
+            <Typography>Principles of Statistics 121</Typography>
+            <Typography>Finance 201</Typography>
+            <Typography>Math 110, 112 (Calculus 1)</Typography>
+            <Typography>Finite Mathematics 118</Typography>
+          </div>
         </Paper>
       </div>
       <div>
         <Paper
           style={{
             padding: 30,
-            width: 400,
+            width: 800,
             marginTop: 30,
             marginLeft: 30,
             marginRight: 30
@@ -49,19 +53,19 @@ export default function Home(props) {
         >
           <Typography variant="h6">Meet Taylor</Typography>
           <Typography>
-            Information about Taylor (Classes, Major, Brief Resume) Economics
-            Major, Senior with a Strategic Management Minor and Statistics
-            Minor. Past intern at Booz Allen Hamilton (Summer Intern), Qualtrics
-            (Data Quality Analyst), Utah Department of Transportation (Business
-            Analyst Intern), Peak Capital (Real Estate Private Equity Intern),
-            and on campus club involvement.
+            Information about Taylor: Economics and Statistics Double Major,
+            Strategic Management Minor. Past intern at Booz Allen Hamilton,
+            Current Sales Operations & Strategy Intern at Qualtrics, Past
+            Special Projects Intern at Utah Department of Transportation, Past
+            Acquisitions Intern at Peak Capital Partners (Real Estate Private
+            Equity).
           </Typography>
         </Paper>
         <div />
         <Card
           style={{
             padding: 30,
-            width: 400,
+            width: 800,
             marginTop: 30,
             marginLeft: 30,
             marginRight: 30
@@ -81,7 +85,7 @@ export default function Home(props) {
         <Paper
           style={{
             padding: 30,
-            width: 400,
+            width: 800,
             marginTop: 30,
             marginLeft: 30,
             marginRight: 30
@@ -89,8 +93,9 @@ export default function Home(props) {
         >
           <Typography variant="h6">Past Reviews</Typography>
           <Typography>
-            5/5 stars for 5 past students. Would recommend from each. 2/5 had
-            over 10 tutoring sessions, repeat requests for meetings.
+            5/5 stars rating from all 5 past students. Would recommend from
+            each. 2/5 had over 10 tutoring sessions each over span of a couple
+            months.
           </Typography>
         </Paper>
       </div>
@@ -98,7 +103,7 @@ export default function Home(props) {
         <Paper
           style={{
             padding: 30,
-            width: 400,
+            width: 800,
             marginTop: 30,
             marginLeft: 30,
             marginRight: 30
@@ -108,32 +113,47 @@ export default function Home(props) {
           <Typography>$30 per hour</Typography>
         </Paper>
       </div>
-      <div>
-        <Paper
-          style={{
-            padding: 30,
-            width: 400,
-            marginTop: 30,
-            marginLeft: 30,
-            marginRight: 30,
-            marginBottom: 100
-          }}
-        >
-          <Typography variant="h6">Get in Touch/ Sign In</Typography>
-          <div style={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              marginTop: "15px",
-              alignItems: "center" }}>
-          <Button component={Link} to="/signup" color="primary" variant="contained">Get in Touch</Button>
-          <Button component={Link} to="/signin" color="primary" variant="contained">Sign In</Button>
-          </div>
-        </Paper>
-      </div>
+      {!props.user && (
+        <div>
+          <Paper
+            style={{
+              padding: 30,
+              width: 800,
+              marginTop: 30,
+              marginLeft: 30,
+              marginRight: 30,
+              marginBottom: 100
+            }}
+          >
+            <Typography variant="h6">Get in Touch/ Sign In</Typography>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                marginTop: "15px",
+                alignItems: "center"
+              }}
+            >
+              <Button
+                component={Link}
+                to="/signup"
+                color="primary"
+                variant="contained"
+              >
+                Get in Touch
+              </Button>
+              <Button
+                component={Link}
+                to="/signin"
+                color="primary"
+                variant="contained"
+              >
+                Sign In
+              </Button>
+            </div>
+          </Paper>
+        </div>
+      )}
     </div>
   );
 }
-
-//* export function taylorpic(props) {
-//* return <img src="TaylorAppPhoto.JPG" alt="" />;}
-//* <div>img src="TaylorAppPhoto.JPG" alt="" /></div>;

@@ -6,23 +6,55 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { auth } from "./firebase";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
+import { auth, db } from "./firebase";
 
 export default function Profile(props) {
+  const [user_data, setUserData] = useState({});
+
+  useEffect(() => {
+    if (props.user) {
+      console.log(props.user);
+      db.collection("users")
+        .doc(props.user.uid)
+        .get()
+        .then(doc => {
+          console.log(doc.data());
+          setUserData(doc.data());
+        });
+    }
+  }, [props.user]);
+
   return (
     <div>
-      <Typography>Link to Calendar</Typography>
-      <Typography>Profile Details</Typography>
       <Paper
         style={{
           padding: 30,
           width: 400,
-          marginTop: 100,
+          marginTop: 20,
+          marginLeft: 30,
+          marginRight: 30
+        }}
+      >
+        <Typography>
+          Link to Calendar <Link to="//google.com">Calendar</Link>
+        </Typography>
+      </Paper>
+      <Paper
+        style={{
+          padding: 30,
+          width: 400,
+          marginTop: 20,
+          marginLeft: 30,
+          marginRight: 30
+        }}
+      >
+        <Typography>Profile Details</Typography>
+      </Paper>
+      <Paper
+        style={{
+          padding: 30,
+          width: 400,
+          marginTop: 20,
           marginLeft: 30,
           marginRight: 30
         }}
@@ -31,8 +63,21 @@ export default function Profile(props) {
           Profile Details
         </Typography>
         <Typography />
+        <Typography>{user_data.name}</Typography>
+        <Typography>{user_data.phonenumber}</Typography>
+        <Typography>{user_data.classchoice}</Typography>
       </Paper>
-      <Typography>Venmo Account Details</Typography>
+      <Paper
+        style={{
+          padding: 30,
+          width: 400,
+          marginTop: 20,
+          marginLeft: 30,
+          marginRight: 30
+        }}
+      >
+        <Typography>Venmo Account Details</Typography>
+      </Paper>
     </div>
   );
 }

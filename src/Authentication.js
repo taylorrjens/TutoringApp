@@ -6,20 +6,16 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 
 export function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phonenumber, setPhoneNumber] = useState("");
-  const [classchoice, setClass] = useState("");
-  const [contactemail, setContactemail] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
       if (u) {
-        props.history.push("/app");
+        props.history.push("/app/profile");
       }
     });
 
@@ -56,6 +52,7 @@ export function SignIn(props) {
           />
           <TextField
             value={password}
+            type={"password"}
             onChange={e => {
               setPassword(e.target.value);
             }}
@@ -80,7 +77,6 @@ export function SignIn(props) {
           </div>
         </Paper>
       </div>
-      
     </div>
   );
 }
@@ -88,6 +84,9 @@ export function SignIn(props) {
 export function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
+  const [classchoice, setClass] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
@@ -102,7 +101,17 @@ export function SignUp(props) {
   const handleSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {})
+      .then(u => {
+        console.log(name, classchoice, phonenumber);
+        db.collection("users")
+          .doc(u.user.uid)
+          .set({
+            email: email,
+            name: name,
+            classchoice: classchoice,
+            phonenumber: phonenumber
+          });
+      })
       .catch(error => {
         alert(error.message);
       });
@@ -119,6 +128,9 @@ export function SignUp(props) {
       </AppBar>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Paper style={{ width: "400px", marginTop: 30, padding: "40px" }}>
+          <Typography variant="h5" style={{ marginTop: 50, marginBottom: 10 }}>
+            Account
+          </Typography>
           <TextField
             fullWidth={true}
             placeholder="email"
@@ -137,6 +149,35 @@ export function SignUp(props) {
             placeholder="password"
             style={{ marginTop: 20 }}
           />
+          <Typography variant="h5" style={{ marginTop: 50 }}>
+            Additional Information
+          </Typography>
+          <Typography style={{ marginTop: 20 }}>Name</Typography>
+          <TextField
+            fullWidth
+            value={name}
+            onChange={e => {
+              setName(e.target.value);
+            }}
+          />
+          <Typography style={{ marginTop: 20 }}>
+            What class would you like help with?
+          </Typography>
+          <TextField
+            fullWidth
+            value={classchoice}
+            onChange={e => {
+              setClass(e.target.value);
+            }}
+          />
+          <Typography style={{ marginTop: 20 }}>Phone Number</Typography>
+          <TextField
+            fullWidth
+            value={phonenumber}
+            onChange={e => {
+              setPhoneNumber(e.target.value);
+            }}
+          />
           <div
             style={{
               display: "flex",
@@ -146,14 +187,13 @@ export function SignUp(props) {
             }}
           >
             <div>
-              Already have an account? <Link to="/">Sign In!</Link>
+              Already have an account? <Link to="/signin">Sign In!</Link>
             </div>
             <Button onClick={handleSignUp} color="primary" variant="contained">
               Sign Up
             </Button>
           </div>
         </Paper>
-        
       </div>
     </div>
   );

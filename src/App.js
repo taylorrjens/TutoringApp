@@ -14,10 +14,23 @@ import { auth, db } from "./firebase";
 import Profile from "./Profile";
 import Survey from "./Survey";
 import Home from "./home";
+import Admin from "./admin";
 
 export function App(props) {
   const [drawer_open, setDrawerOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      db.collection("users")
+        .doc(user.uid)
+        .get()
+        .then(doc => {
+          setIsAdmin(doc.data().admin);
+        });
+    }
+  }, [user]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
@@ -89,7 +102,7 @@ export function App(props) {
               setDrawerOpen(false);
             }}
           >
-            <ListItemText primary="Static" />
+            <ListItemText primary="Home" />
           </ListItem>
           <ListItem
             button
@@ -103,7 +116,7 @@ export function App(props) {
           </ListItem>
           <ListItem
             button
-            to="/app/charts"
+            to="/app/profile"
             component={Link}
             onClick={() => {
               setDrawerOpen(false);
@@ -111,6 +124,18 @@ export function App(props) {
           >
             <ListItemText primary="Your Profile" />
           </ListItem>
+          {isAdmin && (
+            <ListItem
+              button
+              to="/app/admin"
+              component={Link}
+              onClick={() => {
+                setDrawerOpen(false);
+              }}
+            >
+              <ListItemText primary="Admin" />
+            </ListItem>
+          )}
         </List>
       </Drawer>
       <Route
@@ -150,6 +175,20 @@ export function App(props) {
               match={routeProps.match}
               location={routeProps.location}
               history={routeProps.history}
+            />
+          );
+        }}
+      />
+      <Route
+        path="/app/admin/"
+        render={routeProps => {
+          return (
+            <Admin
+              user={user}
+              match={routeProps.match}
+              location={routeProps.location}
+              history={routeProps.history}
+              isAdmin={isAdmin}
             />
           );
         }}
