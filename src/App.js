@@ -106,16 +106,6 @@ export function App(props) {
           </ListItem>
           <ListItem
             button
-            to="/app/survey"
-            component={Link}
-            onClick={() => {
-              setDrawerOpen(false);
-            }}
-          >
-            <ListItemText primary="Basic Info Survey" />
-          </ListItem>
-          <ListItem
-            button
             to="/app/profile"
             component={Link}
             onClick={() => {

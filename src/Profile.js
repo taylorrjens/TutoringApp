@@ -48,17 +48,6 @@ export default function Profile(props) {
           marginRight: 30
         }}
       >
-        <Typography>Profile Details</Typography>
-      </Paper>
-      <Paper
-        style={{
-          padding: 30,
-          width: 400,
-          marginTop: 20,
-          marginLeft: 30,
-          marginRight: 30
-        }}
-      >
         <Typography variant="h6" style={{ marginTop: 20, marginBottom: 20 }}>
           Profile Details
         </Typography>
@@ -66,17 +55,6 @@ export default function Profile(props) {
         <Typography>{user_data.name}</Typography>
         <Typography>{user_data.phonenumber}</Typography>
         <Typography>{user_data.classchoice}</Typography>
-      </Paper>
-      <Paper
-        style={{
-          padding: 30,
-          width: 400,
-          marginTop: 20,
-          marginLeft: 30,
-          marginRight: 30
-        }}
-      >
-        <Typography>Venmo Account Details</Typography>
       </Paper>
     </div>
   );

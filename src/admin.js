@@ -10,10 +10,20 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { auth, db } from "./firebase";
+import { auth, db, functions } from "./firebase";
 
 export default function Admin(props) {
   const [users, setUsers] = useState([]);
+
+  const sendEmail = (name, Amount, url, to) => {
+    const sendMessage = functions.httpsCallable("sendemail");
+    sendMessage({
+      to: to,
+      name: name,
+      Amount: Amount,
+      url: url
+    }).then();
+  };
 
   useEffect(() => {
     if (!props.isAdmin) {
@@ -51,24 +61,34 @@ export default function Admin(props) {
           console.log(user);
           return (
             <div>
-              Name: {user.name} | Class: {user.classchoice} | Email:{" "}
-              {user.email} | Phone Number: {user.phonenumber}
+              <div>
+                Name: {user.name} | Class: {user.classchoice} | Email:{" "}
+                {user.email} | Phone Number: {user.phonenumber}
+              </div>
+              <Button
+                onClick={() => {}}
+                color="secondary"
+                variant="contained"
+                onClick={() => {
+                  sendEmail(
+                    user.email,
+                    user.name,
+                    50,
+                    "venmo://paycharge?txn=pay&recipients=nicksrandall&amount=110.67&note=PhoneBill"
+                  );
+                }}
+                style={{
+                  marginTop: 20,
+                  marginLeft: 30,
+                  marginRight: 30
+                }}
+              >
+                Send Bill
+              </Button>
             </div>
           );
         })}
       </Paper>
-      <Button
-        onClick={() => {}}
-        color="secondary"
-        variant="contained"
-        style={{
-          marginTop: 20,
-          marginLeft: 30,
-          marginRight: 30
-        }}
-      >
-        Send Bill
-      </Button>
     </div>
   );
 }
