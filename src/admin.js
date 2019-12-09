@@ -74,7 +74,7 @@ export default function Admin(props) {
                     user.email,
                     user.name,
                     50,
-                    "venmo://paycharge?txn=pay&recipients=nicksrandall&amount=110.67&note=PhoneBill"
+                    "venmo://paycharge?txn=pay&recipients=Taylor-Jensen-36&amount=50&note=Tutoring"
                   );
                 }}
                 style={{
