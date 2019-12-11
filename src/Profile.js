@@ -25,7 +25,14 @@ export default function Profile(props) {
   }, [props.user]);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
       <Paper
         style={{
           padding: 30,
@@ -35,9 +42,13 @@ export default function Profile(props) {
           marginRight: 30
         }}
       >
-        <Typography>
-          Link to Calendar <Link to="//google.com">Calendar</Link>
+        <Typography variant="h6" style={{ marginTop: 1, marginBottom: 20 }}>
+          Profile Details
         </Typography>
+        <Typography />
+        <Typography>Name: {user_data.name}</Typography>
+        <Typography>Phone Number: {user_data.phonenumber}</Typography>
+        <Typography>Class Choice: {user_data.classchoice}</Typography>
       </Paper>
       <Paper
         style={{
@@ -48,13 +59,31 @@ export default function Profile(props) {
           marginRight: 30
         }}
       >
-        <Typography variant="h6" style={{ marginTop: 20, marginBottom: 20 }}>
-          Profile Details
+        <Typography variant="h6" style={{}}>
+          Calendar & Scheduling
         </Typography>
-        <Typography />
-        <Typography>{user_data.name}</Typography>
-        <Typography>{user_data.phonenumber}</Typography>
-        <Typography>{user_data.classchoice}</Typography>
+        <Typography style={{ marginTop: 15 }}>
+          Instructions: Every Sunday at 7 pm, Taylor will have updated his
+          Google calendar to show the times he is available to meet. You have
+          been given editing priviliges for this calendar so please add an event
+          titled with your name on the times you would like to meet. Times for
+          meetings will be initially allocated on a first-come-first-serve
+          basis, but if rearrangement is needed, feel free to reach out directly
+          to Taylor.
+        </Typography>
+        <Typography style={{ marginTop: 15 }}>
+          Link to Taylor's availability for the upcoming week:{" "}
+          <Link to="//google.com"> Calendar</Link>
+        </Typography>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Button
+            style={{ marginTop: 15 }}
+            color="secondary"
+            variant="contained"
+          >
+            Calendar
+          </Button>
+        </div>
       </Paper>
     </div>
   );

@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { auth, db, functions } from "./firebase";
@@ -44,7 +37,14 @@ export default function Admin(props) {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
       <Paper
         style={{
           padding: 30,
@@ -60,15 +60,23 @@ export default function Admin(props) {
         {users.map(user => {
           console.log(user);
           return (
-            <div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div>
-                Name: {user.name} | Class: {user.classchoice} | Email:{" "}
-                {user.email} | Phone Number: {user.phonenumber}
+                <Typography>
+                  Name: {user.name} | Class: {user.classchoice} | Email:{" "}
+                  {user.email} | Phone Number: {user.phonenumber}
+                </Typography>
               </div>
               <Button
                 onClick={() => {}}
                 color="secondary"
                 variant="contained"
+                style={{
+                  marginTop: 0,
+                  marginBottom: 20,
+                  marginLeft: 0,
+                  marginRight: 30
+                }}
                 onClick={() => {
                   sendEmail(
                     user.email,
@@ -76,11 +84,6 @@ export default function Admin(props) {
                     50,
                     "venmo://paycharge?txn=pay&recipients=Taylor-Jensen-36&amount=50&note=Tutoring"
                   );
-                }}
-                style={{
-                  marginTop: 20,
-                  marginLeft: 30,
-                  marginRight: 30
                 }}
               >
                 Send Bill
