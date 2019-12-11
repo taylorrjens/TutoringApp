@@ -80,6 +80,7 @@ export default function Profile(props) {
             style={{ marginTop: 15 }}
             color="secondary"
             variant="contained"
+            href="/app/calendar"
           >
             Calendar
           </Button>

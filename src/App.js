@@ -183,6 +183,14 @@ export function App(props) {
           );
         }}
       />
+      <Route
+        path="/app/calendar"
+        component={() => {
+          window.location.href =
+            "https://calendar.google.com/calendar/b/1/r?tab=mc";
+          return null;
+        }}
+      />
     </div>
   );
 }
